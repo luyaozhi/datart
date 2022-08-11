@@ -431,6 +431,7 @@ export function SourceDetailPage() {
                 name="name"
                 label={t('form.name')}
                 validateFirst
+                getValueFromEvent={event => event.target.value?.trim()}
                 rules={[
                   {
                     required: true,
