@@ -134,7 +134,7 @@ export const getSchemaBySourceId = createAsyncThunk<any, string>(
     const sourceSchemas = selectSourceDatabaseSchemas(getState() as RootState, {
       id: sourceId,
     });
-    if (sourceSchemas) {
+    if (sourceSchemas && sourceSchemas.length>0) {
       return;
     }
     const { data } = await request2<any>({

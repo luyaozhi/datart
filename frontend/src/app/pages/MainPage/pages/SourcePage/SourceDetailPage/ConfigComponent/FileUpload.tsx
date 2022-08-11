@@ -49,7 +49,7 @@ export function FileUpload({
 
   const uploadChange = useCallback(
     async ({ file }) => {
-      if (file.status === 'done') {
+      if (file!== null && file.status === 'done') {
         const format = file.name
           .substr(file.name.lastIndexOf('.') + 1)
           .toUpperCase();

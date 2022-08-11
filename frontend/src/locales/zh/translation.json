@@ -1428,6 +1428,7 @@
   "source": {
     "source": "数据源",
     "testSuccess": "测试连接成功",
+    "testError": "测试连接失败",
     "createSuccess": "新建数据源成功",
     "archived": "已归档",
     "noPermission": "您没有权限访问该页面",

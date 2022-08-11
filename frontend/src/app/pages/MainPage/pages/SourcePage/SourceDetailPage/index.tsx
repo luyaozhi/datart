@@ -199,34 +199,44 @@ export function SourceDetailPage() {
     const { type, config } = form.getFieldsValue();
     const { name } = dataProviders[type];
     setTestLoading(true);
-    await request2<QueryResult>({
-      url: '/data-provider/test',
-      method: 'POST',
-      data: { name, type, properties: config },
-    });
-    message.success(t('testSuccess'));
-    setTestLoading(false);
+    try {
+      await request2<QueryResult>({
+        url: '/data-provider/test',
+        method: 'POST',
+        data: { name, type, properties: config },
+      });
+      message.success(t('testSuccess'));
+    } catch (error) {
+      message.error(t('testError'));
+    }finally {
+      setTestLoading(false);
+    }
   }, [form, dataProviders, t]);
 
   const subFormTest = useCallback(
     async (config, callback) => {
       const { name } = dataProviders[providerType];
       setTestLoading(true);
-      const { data } = await request2<QueryResult>({
-        url: '/data-provider/test',
-        method: 'POST',
-        data: {
-          name,
-          type: providerType,
-          properties:
-            providerType === 'FILE'
-              ? { path: config.path, format: config.format }
-              : config,
-          sourceId: editingSource?.id,
-        },
-      });
-      setTestLoading(false);
-      callback(data);
+      try {
+        const { data } = await request2<QueryResult>({
+          url: '/data-provider/test',
+          method: 'POST',
+          data: {
+            name,
+            type: providerType,
+            properties:
+              providerType === 'FILE'
+                ? { path: config.path, format: config.format }
+                : config,
+            sourceId: editingSource?.id,
+          },
+        });
+        callback(data);
+      } catch (error) {
+        throw error;
+      }finally {
+        setTestLoading(false);
+      }
     },
     [dataProviders, providerType, editingSource],
   );
