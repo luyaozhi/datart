@@ -70,7 +70,7 @@ public class ExternalRegisterServiceImpl implements ExternalRegisterService {
     public String ldapRegister(String filter, String password) throws MessagingException, UnsupportedEncodingException {
         String usernameAttr = getLdapUsernameAttr();
         try {
-            ldapTemplate.authenticate(LdapQueryBuilder.query().filter(String.format("(|(uid=%s)("+usernameAttr+"=%s))", filter, filter)), password);
+            ldapTemplate.authenticate(LdapQueryBuilder.query().filter(String.format("(|("+usernameAttr+"=%s))", filter, filter)), password);
         } catch (Exception e) {
             return null;
         }
@@ -86,7 +86,7 @@ public class ExternalRegisterServiceImpl implements ExternalRegisterService {
         String email = null;
 
         try {
-            email = ldapTemplate.searchForContext(LdapQueryBuilder.query().where("uid").is(filter).or(usernameAttr).is(filter))
+            email = ldapTemplate.searchForContext(LdapQueryBuilder.query().where(usernameAttr).is(filter))
                     .getAttributes().get("mail").get().toString();
         } catch (Exception ignored) {
         }

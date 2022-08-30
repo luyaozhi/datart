@@ -33,12 +33,12 @@ spring:
 # ldap config
 
   ldap:
-    urls: ldap://ldap.hualala.com:389
-    base: ou=hualala,dc=hualala,dc=com
-    username: administrator@hualala.com
-    password: Hualalamail@2017
+    urls: ldap://cuttlefish-ldap.cloud.ocean.tmc.hualala.com:10389
+    base: cn=users,dc=hualala,dc=com
+    username: 01G9XK0NWJ5HZHVHW7AYHM39QY
+    password: 01G9XK0NWJMT0J5KT4W4B8PSBV01G9XK0NWJCRP5MD8GBYXB821E
     attribute-mapping:
-      username: sAMAccountName
+      username: username
 
 # mail config
 
