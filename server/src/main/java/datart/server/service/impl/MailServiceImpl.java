@@ -175,7 +175,7 @@ public class MailServiceImpl extends BaseService implements MailService {
         context.setVariable(USERNAME_KEY, user.getUsername());
         context.setVariable(INVITER, inviteToken.getInviter());
         context.setVariable(ORG_NAME, org.getName());
-        String activeUrl = Application.getWebRootURL() + "/confirminvite";
+        String activeUrl = Application.getWebDomainNameURL() + "/confirminvite";
         context.setVariable(HOST_KEY, activeUrl);
         String mailContent = templateEngine.process(USER_INVITE_TEMPLATE, context);
         return createMimeMessage(user.getEmail(), getMessage("message.user.invite.mail.subject"), mailContent, true);
@@ -194,7 +194,7 @@ public class MailServiceImpl extends BaseService implements MailService {
         Context context = new Context(LocaleContextHolder.getLocale());
         context.setVariable(USERNAME_KEY, user.getUsername());
         context.setVariable(TOKEN_KEY, tokenString);
-        String activeUrl = Application.getWebRootURL() + "/activation";
+        String activeUrl = Application.getWebDomainNameURL() + "/activation";
         context.setVariable(HOST_KEY, activeUrl);
         String mailContent = templateEngine.process(USER_ACTIVE_TEMPLATE, context);
         return createMimeMessage(user.getEmail(), getMessage("message.user.active.mail.subject"), mailContent, true);

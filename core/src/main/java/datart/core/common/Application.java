@@ -91,6 +91,12 @@ public class Application implements ApplicationContextAware {
         return url;
     }
 
+    public static String getWebDomainNameURL() {
+        String url = getProperty("datart.server.domain.name");
+        url = StringUtils.removeEnd(url, "/");
+        return url;
+    }
+
     public static String getApiPrefix() {
         return getProperty("datart.server.path-prefix");
     }

@@ -21,6 +21,10 @@ datart:
 
   server:
     address: http://127.0.0.1:8080
+    domain:
+      name: http://bi.bigdata.hualala.com
+
+
 
   user:
     active:
